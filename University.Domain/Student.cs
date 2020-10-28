@@ -1,4 +1,4 @@
-﻿namespace ORMDemo
+﻿namespace University.Domain
 {
     public class Student
     {

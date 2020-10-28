@@ -1,6 +1,8 @@
-﻿namespace ORMDemo
+﻿namespace University.NH.Maps
 {
     using FluentNHibernate.Mapping;
+
+    using University.Domain;
 
     public class StudentMap : ClassMap<Student>
     {
@@ -10,7 +12,7 @@
 
             this.Id(x => x.Id);
             this.Map(x => x.Name, "Name");
-            this.References(x => x.Group);//, "ID_Groups");
+            this.References(x => x.Group);
         }
     }
 }
