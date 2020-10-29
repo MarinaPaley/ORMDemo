@@ -28,10 +28,10 @@
 
         internal static IServiceCollection AddNHibernateConfiguration(this IServiceCollection serviceCollection, string connectionStringKey)
         {
-            return serviceCollection.AddSingleton<ISessionFactory>(p => GetSeeSessionFactory(p, connectionStringKey));
+            return serviceCollection.AddSingleton<ISessionFactory>(p => GetSessionFactory(p, connectionStringKey));
         }
 
-        private static ISessionFactory GetSeeSessionFactory(IServiceProvider serviceProvider, string connectionStringKey)
+        private static ISessionFactory GetSessionFactory(IServiceProvider serviceProvider, string connectionStringKey)
         {
             var basePath = Directory.GetParent(AppContext.BaseDirectory).FullName;
 

@@ -9,15 +9,29 @@
 
     using University.Domain;
 
+    /// <summary>
+    /// Демонстрационное приложение.
+    /// </summary>
     internal class App
     {
+        /// <summary>
+        /// Фабрика сессий для работы с БД.
+        /// </summary>
         private readonly ISessionFactory sessionFactory;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="App"/> class.
+        /// </summary>
+        /// <param name="sessionFactory"> Фабрика сессий для работы с БД. </param>
         public App(ISessionFactory sessionFactory)
         {
             this.sessionFactory = sessionFactory ?? throw new ArgumentNullException(nameof(sessionFactory));
         }
 
+        /// <summary>
+        /// Метод запуска приложения.
+        /// </summary>
+        /// <returns> Успешно завершённая задача. </returns>
         public async Task Run()
         {
             Console.OutputEncoding = Encoding.UTF8;
