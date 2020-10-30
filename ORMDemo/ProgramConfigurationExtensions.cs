@@ -23,12 +23,12 @@
                 .AddJsonFile(filename, optional: false, reloadOnChange: true)
                 .Build();
 
-            return serviceCollection.AddSingleton<IConfigurationRoot>(configuration);
+            return serviceCollection.AddSingleton(configuration);
         }
 
         internal static IServiceCollection AddNHibernateConfiguration(this IServiceCollection serviceCollection, string connectionStringKey)
         {
-            return serviceCollection.AddSingleton<ISessionFactory>(p => GetSessionFactory(p, connectionStringKey));
+            return serviceCollection.AddSingleton(serviceProvider => GetSessionFactory(serviceProvider, connectionStringKey));
         }
 
         private static ISessionFactory GetSessionFactory(IServiceProvider serviceProvider, string connectionStringKey)

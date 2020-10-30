@@ -1,6 +1,7 @@
 ﻿namespace University.Domain
 {
     using System;
+    using Infrastructure.Extensions;
 
     public class Name
     {
@@ -10,22 +11,18 @@
 
         public string MiddleName { get; }
 
-        [Obsolete("For NHibernate only.")]
+        [Obsolete("For NHibernate only.", true)]
         protected Name()
         {
         }
 
         public Name(string firstName, string lastName, string middleName)
         {
-            if (string.IsNullOrWhiteSpace(firstName))
-            {
-                throw new ArgumentOutOfRangeException(nameof(firstName));
-            }
+            this.FirstName = firstName.NullIfNullOrWhitespace()
+                ?? throw new ArgumentOutOfRangeException(nameof(firstName));
 
-            if (string.IsNullOrWhiteSpace(lastName))
-            {
-                throw new ArgumentOutOfRangeException(nameof(lastName));
-            }
+            this.LastName = lastName.NullIfNullOrWhitespace()
+                ?? throw new ArgumentOutOfRangeException(nameof(lastName));
 
             //if (!(middleName?.Trim().Any() ?? true))
             //{
@@ -37,8 +34,6 @@
                 throw new ArgumentOutOfRangeException(nameof(middleName));
             }
 
-            this.FirstName = firstName;
-            this.LastName = lastName;
             this.MiddleName = middleName;
         }
 

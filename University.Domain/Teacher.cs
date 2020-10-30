@@ -1,5 +1,6 @@
 ﻿namespace University.Domain
 {
+    using Infrastructure.Extensions;
     using System.Collections.Generic;
 
     public class Teacher
@@ -10,9 +11,6 @@
 
         public virtual ISet<Group> Groups { get; protected set; } = new HashSet<Group>();
 
-        public override string ToString()
-        {
-            return $"{this.Id} --> {this.Name} [{string.Join(", ", this.Groups)}]";
-        }
+        public override string ToString() => $"{this.Id} --> {this.Name} [{this.Groups.Join()}]";
     }
 }
