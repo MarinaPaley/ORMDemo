@@ -5,11 +5,11 @@
 
     public class Name
     {
-        public string FirstName { get; }
+        public virtual string FirstName { get; protected set; }
 
-        public string LastName { get; }
+        public virtual string LastName { get; protected set; }
 
-        public string MiddleName { get; }
+        public virtual string MiddleName { get; protected set; }
 
         [Obsolete("For NHibernate only.", true)]
         protected Name()

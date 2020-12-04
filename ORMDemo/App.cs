@@ -8,24 +8,23 @@
     using NHibernate;
 
     using University.Domain;
+    using University.NH.Repositories;
+    using University.Services;
 
     /// <summary>
     /// Демонстрационное приложение.
     /// </summary>
     internal class App
     {
-        /// <summary>
-        /// Фабрика сессий для работы с БД.
-        /// </summary>
-        private readonly ISessionFactory sessionFactory;
+        private readonly IStudentService studentService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="App"/> class.
         /// </summary>
-        /// <param name="sessionFactory"> Фабрика сессий для работы с БД. </param>
-        public App(ISessionFactory sessionFactory)
+        /// <param name="studentService"> </param>
+        public App(IStudentService studentService)
         {
-            this.sessionFactory = sessionFactory ?? throw new ArgumentNullException(nameof(sessionFactory));
+            this.studentService = studentService ?? throw new ArgumentNullException(nameof(studentService));
         }
 
         /// <summary>
@@ -36,19 +35,12 @@
         {
             Console.OutputEncoding = Encoding.UTF8;
 
-            using (var session = this.sessionFactory.OpenSession())
-            {
-                var students = session.Query<Student>().ToList();
-                foreach (var student in students)
-                {
-                    Console.WriteLine(student);
-                }
+            var studentId = 1;
 
-                var teachers = session.Query<Teacher>().ToList();
-                foreach (var teacher in teachers)
-                {
-                    Console.WriteLine(teacher);
-                }
+            var teachers = this.studentService.GetTeachersByStudentId(studentId);
+            foreach (var item in teachers)
+            {
+                Console.WriteLine(item);
             }
 
             await Task.CompletedTask;
