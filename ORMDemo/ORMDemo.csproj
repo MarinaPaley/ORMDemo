@@ -13,9 +13,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
-    <ProjectReference Include="..\University.Domain\University.Domain.csproj" />
-    <ProjectReference Include="..\University.NH\University.NH.csproj" />
-    <ProjectReference Include="..\University.Services\University.Services.csproj" />
+    <ProjectReference Include="..\University\University.Domain\University.Domain.csproj" />
+    <ProjectReference Include="..\University\University.NH\University.NH.csproj" />
+    <ProjectReference Include="..\University\University.Services\University.Services.csproj" />
   </ItemGroup>
 
   <ItemGroup>

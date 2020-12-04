@@ -10,11 +10,9 @@
     {
         private readonly ISession session;
 
-        public StudentRepository(ISessionFactory sessionFactory)
+        public StudentRepository(ISession session)
         {
-            var factory = sessionFactory ?? throw new ArgumentNullException(nameof(sessionFactory));
-
-            this.session = factory.OpenSession();
+            this.session = session ?? throw new ArgumentNullException(nameof(session));
         }
 
         public IQueryable<Student> GetAll()
@@ -29,8 +27,7 @@
 
         public bool TryGet(int id, out Student student)
         {
-            student = this.Get(id);
-            return student != null;
+            return (student = this.Get(id)) != null;
         }
 
         public IQueryable<Student> Filter(Expression<Func<Student, bool>> filter)

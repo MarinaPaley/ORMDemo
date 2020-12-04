@@ -5,13 +5,13 @@ VisualStudioVersion = 16.0.30523.141
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ORMDemo", "ORMDemo\ORMDemo.csproj", "{07DB8B31-FB27-4CFF-99EB-70D280856F1E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "University.Domain", "University.Domain\University.Domain.csproj", "{82F1EF1A-FD9E-4775-8314-18B0B6ECE560}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "University.Domain", "University\University.Domain\University.Domain.csproj", "{82F1EF1A-FD9E-4775-8314-18B0B6ECE560}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "University.NH", "University.NH\University.NH.csproj", "{751D52E1-0D84-4BA3-9810-94F43326BA9C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "University.NH", "University\University.NH\University.NH.csproj", "{751D52E1-0D84-4BA3-9810-94F43326BA9C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{259623EA-6BC1-4EA2-84B8-BB0ADDC6B742}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "University.Services", "University.Services\University.Services.csproj", "{8539669C-5080-4E22-A7E6-E1AFFB849317}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "University.Services", "University\University.Services\University.Services.csproj", "{8539669C-5080-4E22-A7E6-E1AFFB849317}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "University", "University", "{9FFD0D71-1B4A-48B7-B773-4EB4A05B1D70}"
 EndProject
