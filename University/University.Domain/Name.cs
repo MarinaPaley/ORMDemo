@@ -1,7 +1,7 @@
 ﻿namespace University.Domain
 {
-    using System;
     using Infrastructure.Extensions;
+    using System;
 
     public class Name
     {
@@ -63,6 +63,8 @@
         }
 
         /// <inheritdoc />
-        public override string ToString() => $"{this.LastName} {this.FirstName} {this.MiddleName}".Trim();
+        public override string ToString() => FullName;
+
+        public virtual string FullName => $"{this.LastName} {this.FirstName} {this.MiddleName}".Trim();
     }
 }

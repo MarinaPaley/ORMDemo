@@ -30,6 +30,24 @@ namespace University.NH.Repositories
             return teacher != null;
         }
 
+        public Teacher Create(Teacher teacher)
+        {
+            var id = (int)this.session.Save(teacher);
+            this.session.Flush();
+            return teacher;
+        }
+
+        public void Delete(int id)
+        {
+            if (!this.TryGet(id, out var teacher))
+            {
+                return;
+            }
+
+            this.session.Delete(teacher);
+            this.session.Flush();
+        }
+
         public IQueryable<Teacher> Filter(Expression<Func<Teacher, bool>> filter)
         {
             return this.GetAll().Where(filter);

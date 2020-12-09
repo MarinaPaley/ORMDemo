@@ -1,11 +1,10 @@
 ﻿namespace Infrastructure.Helpers
 {
-    using System.Reflection;
-
     using FluentNHibernate.Cfg;
     using FluentNHibernate.Cfg.Db;
-
+    using Infrastructure.Conventions;
     using NHibernate;
+    using System.Reflection;
 
     /// <summary>
     /// Класс-помощник для настройки NHibernate.
@@ -33,10 +32,10 @@
                 .Database(configuration)
                 .Mappings(m => m
                     .FluentMappings.AddFromAssembly(assembly)
-                    .Conventions.AddAssembly(Assembly.GetExecutingAssembly()));
+                    //.Conventions.AddAssembly(Assembly.GetExecutingAssembly()));
                     //.Conventions.Add<MyIdConvention>()
-                    //.Conventions.Add<MyForeignKeyConvention>()
-                    //.Conventions.Add<MyManyToManyTableNameConvention>());
+                    .Conventions.Add<MyForeignKeyConvention>()
+                    .Conventions.Add<MyManyToManyTableNameConvention>());
         }
 
         public static ISessionFactory GetSessionFactory() => config?.BuildSessionFactory();

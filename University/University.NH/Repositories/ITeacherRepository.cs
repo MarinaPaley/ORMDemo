@@ -12,5 +12,9 @@ namespace University.NH.Repositories
         IQueryable<Teacher> GetAll();
 
         bool TryGet(int id, out Teacher teacher);
+
+        Teacher Create(Teacher teacher);
+
+        void Delete(int id);
     }
 }

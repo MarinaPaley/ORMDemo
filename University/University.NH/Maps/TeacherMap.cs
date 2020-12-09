@@ -13,7 +13,7 @@
         {
             this.Table("Teachers");
 
-            this.Id(x => x.Id);
+            this.Id(x => x.Id).GeneratedBy.Increment(); //.HiLo("Teachers", "ID", "10");
 
             this.Component(x => x.Name);
 

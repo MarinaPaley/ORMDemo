@@ -7,6 +7,8 @@
     {
         IQueryable<Group> GetAll();
 
+        Group Get(int id);
+
         bool TryGet(int id, out Group group);
     }
 }

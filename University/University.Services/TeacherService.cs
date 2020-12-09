@@ -31,5 +31,23 @@
 
             return repository.Filter(t => t.Groups.Contains(targetGroup));
         }
+
+        public Teacher Create(string lastName, string firstName, string middleName)
+        {
+            try
+            {
+                var teacher = new Teacher(lastName, firstName, middleName);
+                return this.repository.Create(teacher);
+            }
+            catch (Exception exception)
+            {
+                return null;
+            }
+        }
+
+        public void Delete(int id)
+        {
+            this.repository.Delete(id);
+        }
     }
 }

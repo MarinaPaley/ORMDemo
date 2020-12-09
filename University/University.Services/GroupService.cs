@@ -3,6 +3,7 @@
     using System;
     using System.Linq;
     using University.Domain;
+    using University.NH.Repositories;
 
     public class GroupService : IGroupService
     {
@@ -18,10 +19,14 @@
             return this.repository.GetAll();
         }
 
+        public Group Get(int id)
+        {
+            return this.repository.Get(id);
+        }
+
         public bool TryGet(int id, out Group group)
         {
-            group = this.GetAll().SingleOrDefault(g => g.Id == id);
-            return group != null;
+            return this.repository.TryGet(id, out group);
         }
     }
 }
