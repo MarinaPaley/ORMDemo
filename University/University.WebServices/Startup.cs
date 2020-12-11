@@ -10,6 +10,7 @@ using NHibernate;
 using University.NH;
 using University.NH.Repositories;
 using University.Services;
+using University.WebServices.Controllers;
 
 namespace University.WebServices
 {
@@ -25,7 +26,7 @@ namespace University.WebServices
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson();
 
             AddConfigurationFromFile(services,"appsettings.json");
             AddNHibernateConfiguration(services, "relative");
@@ -37,6 +38,8 @@ namespace University.WebServices
 
             services.AddSingleton<IGroupRepository, GroupRepository>();
             services.AddScoped<IGroupService, GroupService>();
+
+            services.AddMapper();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

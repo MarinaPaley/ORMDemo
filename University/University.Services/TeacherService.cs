@@ -17,6 +17,11 @@
             this.groupService = groupService ?? throw new ArgumentNullException(nameof(groupService));
         }
 
+        public bool TryGet(int id, out Teacher teacher)
+        {
+            return this.repository.TryGet(id, out teacher);
+        }
+
         public IQueryable<Teacher> GetAll()
         {
             return this.repository.GetAll();

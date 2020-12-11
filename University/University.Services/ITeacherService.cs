@@ -5,6 +5,8 @@
 
     public interface ITeacherService
     {
+        bool TryGet(int id, out Teacher teacher);
+
         IQueryable<Teacher> GetAll();
 
         IQueryable<Teacher> GetTeachersByGroupId(int groupId);

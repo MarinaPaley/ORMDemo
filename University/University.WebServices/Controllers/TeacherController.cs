@@ -1,5 +1,7 @@
 ﻿namespace University.WebServices.Controllers
 {
+    using AutoMapper;
+    using Microsoft.AspNetCore.JsonPatch;
     using Microsoft.AspNetCore.Mvc;
     using System;
     using System.Collections.Generic;
@@ -14,21 +16,32 @@
     {
         private readonly ITeacherService service;
 
-        public TeacherController(ITeacherService service)
+        private readonly IMapper mapper;
+
+        public TeacherController(ITeacherService service, IMapper mapper)
         {
             this.service = service ?? throw new ArgumentNullException(nameof(service));
+            this.mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
         [HttpGet("for-group/{groupId}")]
-        public IEnumerable<TeacherViewModel> Filter([FromRoute] int groupId)
+        public IActionResult Filter([FromRoute] int groupId)
         {
-            return this.service.GetTeachersByGroupId(groupId).Select(t => new TeacherViewModel(t.Name));
+            var result = this.service.GetTeachersByGroupId(groupId)
+                .AsEnumerable()
+                .Select(this.mapper.Map<Teacher, TeacherViewModel>);
+
+            return this.Ok(result);
         }
 
         [HttpGet]
-        public IEnumerable<Teacher> GetAll()
+        public IActionResult GetAll()
         {
-            return this.service.GetAll().ToList();
+            var result = this.service.GetAll()
+                .AsEnumerable()
+                .Select(this.mapper.Map<Teacher, TeacherDto>);
+
+            return this.Ok(result);
         }
 
         /// <summary>
@@ -40,7 +53,7 @@
         /// <param name="dto"></param>
         /// <returns></returns>
         [HttpPost]
-        public IActionResult Create([FromBody] TeacherDTO dto)
+        public IActionResult Create([FromBody] TeacherDto dto)
         {
             if (dto is null)
             {
@@ -57,10 +70,37 @@
             return this.Ok(new { Id = teacher.Id });
         }
 
+        /// <summary>
+        /// Удаление объекта типа <see cref="Teacher"/>.
+        /// </summary>
+        /// <param name="id"> Идентификатор удаляемого объекта. </param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
         public IActionResult Delete([FromRoute] int id)
         {
             this.service.Delete(id);
+            return this.Ok(new { Id = id });
+        }
+
+        [HttpPatch("{id}")]
+        public IActionResult Update([FromRoute] int id, [FromBody] JsonPatchDocument<TeacherDto> teacherPatch)
+        {
+            if (!this.service.TryGet(id, out var targetTeacher))
+            {
+                return this.NotFound(new { Id = id });
+            }
+
+            var teacherDto = new TeacherDto
+            {
+                LastName = targetTeacher.Name.LastName,
+                FirstName = targetTeacher.Name.FirstName,
+                MiddleName = targetTeacher.Name.MiddleName,
+            };
+
+            teacherPatch.ApplyTo(teacherDto);
+
+            // save targetTeacher
+
             return this.Ok(new { Id = id });
         }
     }
